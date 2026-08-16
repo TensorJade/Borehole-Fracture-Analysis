@@ -1,0 +1,39 @@
+# Python environments and caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+build/
+dist/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local datasets: excluded until provenance and redistribution rights are documented
+data/raw/**
+!data/raw/README.md
+data/training/**
+!data/training/README.md
+data/examples/**
+!data/examples/README.md
+
+# Trained checkpoints and generated artifacts
+models/**
+!models/README.md
+artifacts/**
+!artifacts/.gitkeep
+
+# Common model formats
+*.pth
+*.pt
+*.onnx

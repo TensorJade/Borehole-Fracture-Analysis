@@ -1,0 +1,9 @@
+Borehole Fracture Analysis
+
+The MIT License in LICENSE applies to the source code and documentation in
+this repository.
+
+It does not grant rights to redistribute datasets, images, annotations,
+trained checkpoints, paper PDFs, or generated artifacts stored locally under
+data/, models/, or artifacts/. Those items require their own provenance and
+license records before public distribution.

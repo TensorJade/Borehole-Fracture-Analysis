@@ -1,0 +1,21 @@
+name: Feature request
+description: Propose an algorithm or engineering improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: User need
+      description: Describe the problem and acceptance criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed approach
+      description: Include data, API, dependency, compatibility, and validation impacts.
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and alternatives

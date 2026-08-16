@@ -7,3 +7,8 @@ It does not grant rights to redistribute datasets, images, annotations,
 trained checkpoints, paper PDFs, or generated artifacts stored locally under
 data/, models/, or artifacts/. Those items require their own provenance and
 license records before public distribution.
+
+The synthetic demonstration parameters in
+src/borehole_fracture_analysis/resources/demo_linear_segmenter.json are an
+exception: they were created for this repository and are covered by the MIT
+License.

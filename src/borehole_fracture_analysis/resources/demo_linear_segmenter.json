@@ -1,0 +1,13 @@
+{
+  "format_version": 1,
+  "model_type": "linear_rgb_pixel_classifier",
+  "description": "Deterministic synthetic demo parameters for detecting dark fracture pixels. These parameters are not the research Attention U-Net checkpoint.",
+  "license": "MIT",
+  "parameters": {
+    "channel_weights": [-4.0, -4.0, -4.0],
+    "bias": 7.2,
+    "probability_threshold": 0.5,
+    "morphology_kernel": 3,
+    "min_component_area": 64
+  }
+}

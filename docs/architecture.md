@@ -21,6 +21,7 @@ flowchart LR
 src/borehole_fracture_analysis/
 ├── cli.py                    # 公共命令行入口与阶段编排
 ├── config.py                 # 路径、钻孔坐标和物理常量
+├── demo.py                   # 合成输入与可分发的轻量演示模型
 ├── segmentation.py           # 数据配对、训练、推理
 ├── sinusoidal_fitting.py     # 聚类和正弦拟合
 ├── roughness_analysis.py     # 平整化、采样和 JRC

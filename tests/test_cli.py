@@ -8,6 +8,9 @@ from borehole_fracture_analysis.cli import build_parser, get_training_pair_statu
 def test_parser_exposes_semantic_commands() -> None:
     arguments = build_parser().parse_args(["fit-sinusoids"])
     assert arguments.command == "fit-sinusoids"
+    demo_arguments = build_parser().parse_args(["demo", "--demo-output", "demo-output"])
+    assert demo_arguments.command == "demo"
+    assert demo_arguments.demo_output == Path("demo-output")
 
 
 def test_training_pair_status_matches_stems(tmp_path: Path, monkeypatch) -> None:
@@ -57,6 +60,7 @@ def test_check_project_and_run_all_orchestration(tmp_path: Path, monkeypatch) ->
 def test_stage_wrappers_delegate_to_algorithm_modules(tmp_path: Path, monkeypatch) -> None:
     from borehole_fracture_analysis import (
         connectivity,
+        demo,
         reconstruction,
         roughness_analysis,
         segmentation,
@@ -100,12 +104,18 @@ def test_stage_wrappers_delegate_to_algorithm_modules(tmp_path: Path, monkeypatc
         "run_connectivity",
         lambda *args: calls.append(("connectivity", args)),
     )
+    monkeypatch.setattr(
+        demo,
+        "run_demo",
+        lambda *args: calls.append(("demo", args)),
+    )
 
     cli.run_training(model_path, epochs=1, batch_size=1)
     cli.run_segmentation(model_path)
     cli.run_sinusoidal_stage()
     cli.run_roughness_stage()
     cli.run_reconstruction_stage()
+    cli.run_demo_stage(tmp_path / "demo")
 
     assert [name for name, _ in calls] == [
         "train",
@@ -114,4 +124,5 @@ def test_stage_wrappers_delegate_to_algorithm_modules(tmp_path: Path, monkeypatc
         "roughness",
         "reconstruct",
         "connectivity",
+        "demo",
     ]

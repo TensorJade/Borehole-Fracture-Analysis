@@ -8,6 +8,7 @@
 
 | 命令 | Python 模块 | 作用 |
 |---|---|---|
+| `demo` | `demo.py` | 无外部数据依赖的合成图像与演示模型推理 |
 | `segment` | `segmentation.py` | Attention U-Net 训练与裂隙掩码预测 |
 | `fit-sinusoids` | `sinusoidal_fitting.py` | DBSCAN 聚类与正弦参数拟合 |
 | `analyze-roughness` | `roughness_analysis.py` | 平整化、采样和 JRC 估计 |
@@ -19,7 +20,7 @@
 
 ```powershell
 git clone https://github.com/TensorJade/Borehole-Fracture-Analysis.git
-cd borehole-fracture-analysis
+cd Borehole-Fracture-Analysis
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -27,6 +28,42 @@ python -m pip install -e ".[dev]"
 ```
 
 若只运行、不开发，可使用 `python -m pip install -e .`。
+
+## 克隆后直接演示
+
+演示命令不需要下载数据集或研究模型权重：
+
+```powershell
+borehole-fracture demo
+```
+
+它会自动生成一张合成钻孔展开图，并在 `artifacts/demo/` 输出：
+
+- `synthetic_borehole.png`：合成输入图像；
+- `demo_fracture_mask.png`：黑色裂隙、白色背景的预测掩码；
+- `demo_overlay.png`：红色裂隙叠加图；
+- `demo_summary.json`：调用参数和输出摘要。
+
+![Runnable demo overlay](docs/assets/demo_overlay.png)
+
+也可以直接运行 Python 用例：
+
+```powershell
+python examples/run_demo.py --output artifacts/my-demo
+```
+
+或者在代码中调用：
+
+```python
+from pathlib import Path
+
+from borehole_fracture_analysis.demo import run_demo
+
+outputs = run_demo(Path("artifacts/api-demo"))
+print(outputs["overlay_image"])
+```
+
+可直接执行的模型参数位于 [`demo_linear_segmenter.json`](src/borehole_fracture_analysis/resources/demo_linear_segmenter.json)。它是随代码发布的合成演示参数，不是论文训练得到的 Attention U-Net 权重，不能用于科研指标或工程判断。详细说明见 [演示模型说明](docs/demo.md)。
 
 ## 准备数据
 
@@ -50,6 +87,7 @@ data/
 
 ```powershell
 borehole-fracture check
+borehole-fracture demo
 borehole-fracture train --epochs 100 --batch-size 16
 borehole-fracture segment
 borehole-fracture fit-sinusoids

@@ -9,6 +9,7 @@ All notable changes are documented in this file.
 - Installable `src/` package and unified `borehole-fracture` CLI.
 - Automated checks, tests, CI configuration, architecture and data documentation.
 - Code-only MIT licensing boundary and local-data exclusion rules.
+- Self-contained `demo` command, Python example, synthetic input generator, and distributable JSON model parameters.
 
 ### Changed
 

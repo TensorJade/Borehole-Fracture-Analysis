@@ -146,6 +146,14 @@ def run_reconstruction_stage() -> None:
     )
 
 
+def run_demo_stage(output_directory: Path) -> None:
+    """Run the packaged demo without external data or a research checkpoint."""
+
+    from .demo import run_demo
+
+    run_demo(output_directory)
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Create the public command-line parser."""
 
@@ -157,6 +165,7 @@ def build_parser() -> argparse.ArgumentParser:
         "command",
         choices=(
             "check",
+            "demo",
             "train",
             "segment",
             "fit-sinusoids",
@@ -168,6 +177,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model", type=Path, default=MODEL_PATH)
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--demo-output", type=Path, default=ARTIFACT_ROOT / "demo")
     parser.add_argument("--train-if-missing", action="store_true")
     parser.add_argument("--log-level", choices=("DEBUG", "INFO", "WARN", "ERROR"), default="INFO")
     return parser
@@ -183,6 +193,9 @@ def main() -> None:
 
     if arguments.command == "check":
         raise SystemExit(0 if check_project(model_path) else 1)
+    if arguments.command == "demo":
+        run_demo_stage(arguments.demo_output)
+        return
     if arguments.command == "train":
         run_training(model_path, arguments.epochs, arguments.batch_size)
         return

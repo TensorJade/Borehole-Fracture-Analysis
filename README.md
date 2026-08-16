@@ -18,7 +18,7 @@
 推荐 Python 3.10 或 3.11：
 
 ```powershell
-git clone <your-repository-url>
+git clone https://github.com/TensorJade/Borehole-Fracture-Analysis.git
 cd borehole-fracture-analysis
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1

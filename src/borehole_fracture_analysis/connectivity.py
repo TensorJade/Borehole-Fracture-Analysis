@@ -51,7 +51,7 @@ def calculate_connectivity(frame):
     norms = np.linalg.norm(normals, axis=1, keepdims=True)
     if np.any(norms == 0):
         raise ValueError("裂隙平面表包含零法向量")
-    normals /= norms
+    normals = normals / norms
     results = []
     for i, j in combinations(range(len(frame)), 2):
         row_i, row_j = frame.iloc[i], frame.iloc[j]
